@@ -2,6 +2,10 @@
 Changelog for package rosparam_handler
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* switch to Python3
+
 0.1.4 (2018-09-02)
 ------------------
 * update doc

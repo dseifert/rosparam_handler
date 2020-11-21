@@ -26,7 +26,7 @@
 # Author: Claudio Bandera
 #
 
-from __future__ import print_function
+
 from string import Template
 import sys
 import os
@@ -54,7 +54,7 @@ class ParameterGenerator(object):
             self.group = group
         else:
             self.group = "gen"
-        self.group_variable = filter(str.isalnum, self.group)
+        self.group_variable = ''.join(filter(str.isalnum, self.group))
 
         if len(sys.argv) != 5:
             eprint(
@@ -303,7 +303,7 @@ class ParameterGenerator(object):
         values = param[field]
         assert (isinstance(values, dict))
         form = ""
-        for key, value in values.items():
+        for key, value in list(values.items()):
             if param['type'] == 'std::map<std::string,std::string>':
                 pair = '{{"{}","{}"}}'.format(key, value)
             elif param['type'] == 'std::map<std::string,bool>':
@@ -514,7 +514,7 @@ class ParameterGenerator(object):
         with open(py_file, 'w') as f:
             f.write(content)
         init_file = os.path.join(self.py_gen_dir, "param", "__init__.py")
-        with open(init_file, 'wa') as f:
+        with open(init_file, 'a') as f:
             f.write("")
 
     def _generateyml(self):

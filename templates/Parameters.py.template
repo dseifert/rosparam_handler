@@ -28,7 +28,7 @@ class ${ClassName}Parameters(dict):
         Reads and initializes parameters with values from parameter server.
         Called automatically at initialization.
         """
-        for k, v in self.iteritems():
+        for k, v in iter(self.items()):
             config = next((item for item in param_description if item["name"] == k), None)
             if config['constant']:
                 self.test_const_param(k)
@@ -41,7 +41,7 @@ class ${ClassName}Parameters(dict):
         """
         Sets parameters with current values on the parameter server.
         """
-        for param_name, param_value in self.iteritems():
+        for param_name, param_value in iter(self.items()):
             config = next((item for item in param_description if item["name"] == param_name), None)
             if not config['constant']:
                 full_name = "/" + param_name if config['global_scope'] else "~" + param_name
@@ -53,7 +53,7 @@ class ${ClassName}Parameters(dict):
         Should be called in the callback of dynamic_reconfigure.
         :param config: config object from dynamic reconfigure
         """
-        for k, v in config.iteritems():
+        for k, v in iter(config.items()):
             # handle reserved name groups
             if k == "groups":
                 continue
